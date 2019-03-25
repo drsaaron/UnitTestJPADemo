@@ -6,10 +6,8 @@
 package com.blazartech.unittestjpademo.data.access;
 
 import com.blazartech.products.crypto.BlazarCryptoFile;
-import com.blazartech.products.crypto.BlazarCryptoFileKey;
 import com.blazartech.unittestjpademo.data.PersonData;
 import com.blazartech.unittestjpademo.data.config.PersonDataConfig;
-import java.util.Collection;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.junit.After;
@@ -19,9 +17,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
@@ -42,25 +42,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class PersonDataDALJPAImplTest {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonDataDALJPAImplTest.class);
-
-    static class MockCryptoFile implements BlazarCryptoFile {
-
-        @Override
-        public String getPassword(String string, String string1) {
-            return "blah";
-        }
-
-        @Override
-        public void updatePassword(String string, String string1, String string2) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public Collection<BlazarCryptoFileKey> getKeys() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-        
-    }
     
     @Configuration
     static class PersonDataDALJPAImplTestConfig {
@@ -69,12 +50,11 @@ public class PersonDataDALJPAImplTest {
         public PersonDataDALJPAImpl instance() {
             return new PersonDataDALJPAImpl();
         }
-        
-        @Bean
-        public BlazarCryptoFile cryptoFile() {
-            return new MockCryptoFile();
-        }
+
     }
+    
+    @MockBean
+    private BlazarCryptoFile cryptoFile;
 
     @Autowired
     private PersonDataDALJPAImpl instance;
@@ -92,6 +72,8 @@ public class PersonDataDALJPAImplTest {
 
     @Before
     public void setUp() {
+        Mockito.when(cryptoFile.getPassword("aar1069", "blah"))
+                .thenReturn("blah");
     }
 
     @After
@@ -110,9 +92,9 @@ public class PersonDataDALJPAImplTest {
 
         assertEquals(5, result.size());
         
-        for (PersonData p : result) {
+        result.forEach((p) -> {
             logger.info("perso " + p);
-        }
+        });
     }
 
     @Test
