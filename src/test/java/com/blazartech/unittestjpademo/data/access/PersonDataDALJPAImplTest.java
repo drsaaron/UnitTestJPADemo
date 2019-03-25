@@ -26,20 +26,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author AAR1069
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @ContextConfiguration(
         classes = {
             PersonDataConfig.class,
             PersonDataDALJPAImplTest.PersonDataDALJPAImplTestConfig.class
-        },
-        loader = AnnotationConfigContextLoader.class)
+        })
 @Transactional
 public class PersonDataDALJPAImplTest {
 
