@@ -21,7 +21,7 @@ import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockitoBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
@@ -53,7 +53,7 @@ public class PersonDataDALJPAImplTest {
 
     }
     
-    @MockBean
+    @MockitoBean
     private BlazarCryptoFile cryptoFile;
 
     @Autowired
