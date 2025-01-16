@@ -5,7 +5,7 @@
 
     <groupId>com.blazartech</groupId>
     <artifactId>UnitTestJPADemo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>UnitTestJPADemo</name>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.blazartech</groupId>
             <artifactId>BlazarCryptoFile-mvn</artifactId>
-            <version>1.0.0-RELEASE</version>
+            <version>1.2-SNAPSHOT</version>
         </dependency>
         
         <dependency>
